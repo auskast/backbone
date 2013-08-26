@@ -28,6 +28,7 @@
         "Backbone": true,
         "Marionette": true,
         "define": true,
-        "require": true
+        "require": true,
+        "Todos": true
     }
 }
