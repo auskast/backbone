@@ -5,13 +5,15 @@ require.config({
         collections: 'collections',
         models: 'models',
         tpls: 'tpls',
+        utils: 'utils',
         views: 'views'
     }
 });
 
-var Library = {};
+window.Library = {};
 
-require(['views/library'], function (LibraryView) {
+require(['views/library', 'utils/factory'], function (LibraryView) {
+    'use strict';
     var books = [
         { title: 'JavaScript: The Good Parts', author: 'Douglas Crockford', releaseDate: '2008', keywords: 'JavaScript Programming' },
         { title: 'The Little Book on CoffeeScript', author: 'Alex MacCaw', releaseDate: '2012', keywords: 'CoffeeScript Programming' },
@@ -20,5 +22,5 @@ require(['views/library'], function (LibraryView) {
         { title: 'Eloquent JavaScript', author: 'Marijn Haverbeke', releaseDate: '2011', keywords: 'JavaScript Programming' }
     ];
 
-    new LibraryView(books);
+    Library.factory(LibraryView, books);
 });
