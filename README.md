@@ -1,4 +1,1 @@
-backbone
-========
-
 Backbone.js examples
