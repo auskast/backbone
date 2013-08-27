@@ -1,5 +1,7 @@
 define(function (require) {
     'use strict';
+    var _ = require('underscore');
+    var Backbone = require('backbone');
     var LibraryCollection = require('collections/library');
     var BookView = require('views/book');
     var BookModel = require('models/book');
