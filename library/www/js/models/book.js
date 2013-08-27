@@ -7,6 +7,7 @@ define(function () {
             author: 'Unknown',
             releaseDate: 'Unknown',
             keywords: 'None'
-        }
+        },
+        idAttribute: '_id'
     });
 });

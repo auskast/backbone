@@ -8,12 +8,16 @@ define(function (require) {
         events: {
             'click #add': 'addBook'
         },
-        initialize: function (initialBooks) {
-            this.collection = new LibraryCollection(initialBooks);
-
-            this.listenTo(this.collection, 'add', this.renderBook);
+        initialize: function () {
+            this.collection = new LibraryCollection();
+            this.collection.fetch({
+                reset: true
+            });
 
             this.render();
+
+            this.listenTo(this.collection, 'add', this.renderBook);
+            this.listenTo(this.collection, 'reset', this.render);
         },
         render: function () {
             this.collection.each(function (item) {
@@ -33,11 +37,23 @@ define(function (require) {
             $('#addBook div').children('input').each(function (item, el) {
                 var value = $(el).val();
                 if (value !== '') {
-                    formData[el.id] = value;
+                    if (el.id === 'keywords') {
+                        formData[el.id] = [];
+                        _.each(value.split(' '), function (keyword) {
+                            formData[el.id].push({
+                                keyword: keyword
+                            });
+                        });
+                    } else if (el.id === 'releaseDate') {
+                        formData[el.id] = $('#releaseDate').datepicker('getDate').getTime();
+                    } else {
+                        formData[el.id] = value;
+                    }
                 }
+                $(el).val('');
             });
 
-            this.collection.add(new BookModel(formData));
+            this.collection.create(formData);
         }
     });
 });
